@@ -1,0 +1,8 @@
+.sampul {
+  width: 70px;
+}
+
+/* tanda (*) menunjukan bahwa apapun yang ada didalam .table > tbody > tr > */
+.table > tbody > tr > * {
+  vertical-align: middle;
+}
