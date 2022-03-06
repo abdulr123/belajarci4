@@ -34,6 +34,9 @@ $routes->setAutoRoute(true);
 
 $routes->get('/', 'Halaman::index');
 
+//jika ada yang mengkases /buku/lalu-apapun , lalu kita arahkan ke controller Buku methodnya detail lalu kirimkan ke segment
+$routes->get('/buku/(:segment)', 'Buku::detail/$1');
+
 /*
  * --------------------------------------------------------------------
  * Additional Routing

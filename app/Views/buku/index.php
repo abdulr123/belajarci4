@@ -23,7 +23,7 @@
                             <td><?= $b['penulis']; ?></td>
                             <td><?= $b['penerbit']; ?></td>
                             <td>
-                                <a href="" class="btn btn-success">Detail</a>
+                                <a href="/buku/<?= $b['slug']; ?>" class="btn btn-success">Detail</a>
                             </td>
                         </tr>
                     <?php endforeach; ?>
