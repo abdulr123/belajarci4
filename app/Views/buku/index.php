@@ -4,6 +4,13 @@
             <h1>Data Buku</h1>
             <!-- Tambahkan button (Tambah Data Buku)-->
             <a href="/crud/create" class="btn btn-primary mb-3">Tambah Data Buku</a>
+
+            <?php if (session()->getFlashdata('pesan')) : ?>
+                <div class="alert alert-success" role="alert">
+                    <?= session()->getFlashdata('pesan'); ?>
+                </div>
+            <?php endif; ?>
+
             <table class="table">
                 <thead>
                     <tr>

@@ -33,6 +33,11 @@ class Buku extends BaseController
             'buku' => $this->BukuModel->getBuku($slug)
         ];
 
+        // jika buku tidak ada ditabel maka tampilkan halaman 404
+        if (empty($data['buku'])) {
+            throw new \CodeIgniter\Exceptions\PageNotFoundException('Judul Buku '  .  $slug  . ' Tidak ditemukan.');
+        }
+
         echo view('template/header', $data);
         return view('buku/detail', $data);
         echo view('template/footer');

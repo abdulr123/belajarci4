@@ -4,6 +4,7 @@
             <h2 class="my-3">Form Tambah Data Buku</h2>
 
             <form action="/crud/simpan" method="POST">
+                <!-- CSRF (Cross Site Request Forgery) merupakan salah satu teknik penetrasi pada celah keamanan website. -->
                 <?= csrf_field(); ?>
                 <div class="row mb-3">
                     <label for="judul" class="col-sm-2 col-form-label">Judul</label>

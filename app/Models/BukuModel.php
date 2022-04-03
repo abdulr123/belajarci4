@@ -8,6 +8,8 @@ class BukuModel extends Model
 {
     protected $table      = 'buku';
     protected $useTimestamps = true;
+    //tambhakan field yang bisa diisi manual oleh user
+    protected $allowedFields = ['judul', 'slug', 'penulis', 'penerbit', 'cover'];
 
     public function getBuku($slug = false)
     {
