@@ -13,8 +13,8 @@
                             <h5 class="card-title"><?= $buku['judul']; ?></h5>
                             <p class="card-text"><b>Penulis : </b> <?= $buku['penulis']; ?></p>
                             <p class="card-text"><small class="text-muted"><b>Penerbit : </b> <?= $buku['penerbit']; ?></small></p>
-                            <a href="" class="btn btn-warning">Edit</a>
-                            <a href="" class="btn btn-danger">Hapus</a>
+                            <a href="/crud/edit/<?= $buku['slug']; ?>" class="btn btn-warning">Edit</a>
+                            <a href="/crud/delete/<?= $buku['id']; ?>" class="btn btn-danger" onclick="return confirm('Apakah anda yakin?');">Hapus</a>
                             <br>
                             <br>
                             <a href="/buku" class="">Kembali ke daftar buku</a>
