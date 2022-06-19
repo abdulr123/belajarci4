@@ -31,21 +31,49 @@ class Crud extends BaseController
         // validasi input
         if (!$this->validate([
             'judul' => [
-                'rules' => 'required|is_unique[buku.judul]',
-                'errors' => [
-                    'required' => '{field} buku harus di isi.',
+                'rules'         => 'required|is_unique[buku.judul]',
+                'errors'        => [
+                    'required'  => '{field} buku harus di isi.',
                     'is_unique' => '{field} buku sudah terdaftar'
+                ]
+            ],
+            // untuk validasi gambar bisa cek pada dokumentasi codeigniter https://www.codeigniter.com/user_guide/libraries/validation.html
+            'cover' => [
+                'rules'         => 'is_image[cover]|mime_in[cover,image/jpg,image/jpeg,image/png]',
+
+                'errors'        => [
+                    //'uploaded'  => 'Cover buku harus dipilih.',
+                    'is_image'  => 'Yang anda pilih bukan gambar.',
+                    'mime_in'   => 'Cover buku harus berekstensi png,jpg,gif.'
                 ]
             ]
 
-
-
         ])) {
-            $validation = \Config\Services::validation();
-            return redirect()->to('/crud/create')->withInput()->with('validation', $validation);
+            //$validation = \Config\Services::validation();
+            //return redirect()->to('/crud/create')->withInput()->with('validation', $validation);
+            return redirect()->to('/crud/create')->withInput();
         }
 
+        //VERSI GAMBAR WAJIB DI UPLOAD
+        //ambil terlebih dulu gambarnya
+        //$fileCover = $this->request->getFile('cover');
+        //lalu pindahkan file kedalam folder img
+        //$fileCover->move('img');
+        //ambil nama file cover
+        //$namaCover = $fileCover->getName();
 
+        //VERSI GAMBAR TIDAK WAJIB DI UPLOAD DAN LANGSUNG DI RENAME
+        //ambil terlebih dulu gambarnya
+        $fileCover = $this->request->getFile('cover');
+        //cek apakah tidak ada gambar yang di upload
+        if ($fileCover->getError() == 4) {
+            $namaCover = 'default.png';
+        } else {
+            //generate nama cover acak
+            $namaCover = $fileCover->getRandomName();
+            //pindahkan file cover
+            $fileCover->move('img', $namaCover);
+        }
 
         // rl_title digunakan untuk membuat field slug pada database terisi otomatis
         $slug = url_title($this->request->getVar('judul'), '-', true);
@@ -55,7 +83,7 @@ class Crud extends BaseController
             'slug'      => $slug,
             'penulis'   => $this->request->getVar('penulis'),
             'penerbit'  => $this->request->getVar('penerbit'),
-            'cover'     => $this->request->getVar('cover')
+            'cover'     => $namaCover
         ]);
 
         session()->setFlashdata('pesan', 'Data berhasil ditambahkan.');
@@ -95,6 +123,7 @@ class Crud extends BaseController
             $rule_judul = 'required|is_unique[buku.judul]';
         }
 
+
         if (!$this->validate([
             'judul' => [
                 'rules' => $rule_judul,
@@ -102,11 +131,37 @@ class Crud extends BaseController
                     'required' => '{field} buku harus di isi.',
                     'is_unique' => '{field} buku sudah terdaftar'
                 ]
+            ],
+            // untuk validasi gambar bisa cek pada dokumentasi codeigniter https://www.codeigniter.com/user_guide/libraries/validation.html
+            'cover' => [
+                'rules'         => 'is_image[cover]|mime_in[cover,image/jpg,image/jpeg,image/png]',
+
+                'errors'        => [
+                    //'uploaded'  => 'Cover buku harus dipilih.',
+                    'is_image'  => 'Yang anda pilih bukan gambar.',
+                    'mime_in'   => 'Cover buku harus berekstensi png,jpg,gif.'
+                ]
             ]
 
         ])) {
-            $validation = \Config\Services::validation();
-            return redirect()->to('/crud/edit/' . $this->request->getVar('slug'))->withInput()->with('validation', $validation);
+
+            return redirect()->to('/crud/edit/' . $this->request->getVar('slug'))->withInput();
+        }
+
+        $fileCover = $this->request->getFile('cover');
+
+
+        //cek gambar, apakah tetap gambar yang lama
+        //angka 4 diasumsikan bahwa tidak ada perubahan data atau file tidak ada
+        if ($fileCover->getError() == 4) {
+            $namaCover = $this->request->getVar('coverLama');
+        } else {
+            //generate nama file random
+            $namaCover = $fileCover->getRandomName();
+            //pindahkan gambar
+            $fileCover->move('img', $namaCover);
+            //hapus file yang lama
+            unlink('img/' . $this->request->getVar('coverLama'));
         }
 
         $slug = url_title($this->request->getVar('judul'), '-', true);
@@ -116,7 +171,7 @@ class Crud extends BaseController
             'slug'      => $slug,
             'penulis'   => $this->request->getVar('penulis'),
             'penerbit'  => $this->request->getVar('penerbit'),
-            'cover'     => $this->request->getVar('cover')
+            'cover'     => $namaCover
         ]);
 
         session()->setFlashdata('pesan', 'Data berhasil diubah.');
