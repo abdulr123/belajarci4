@@ -14,9 +14,13 @@ Materi pemrograman web lanjut tentang pembelajaran codeigniter 4 membahas tentan
 
 **UPDATE**
 
-![image](https://user-images.githubusercontent.com/48147326/174296877-1a279ca5-5ce7-4ec4-92b8-435777091f16.png)
+![image](https://user-images.githubusercontent.com/48147326/179213302-a0450b56-b061-477b-bd30-a15757ff5403.png)
 
 
 **DELETE**
 
-![image](https://user-images.githubusercontent.com/48147326/174296964-3d82ea3e-4604-4ceb-ab28-ffb48a9fdab1.png)
+![image](https://user-images.githubusercontent.com/48147326/179213467-4fc5d97e-a22d-4833-8fd4-f2775705de70.png)
+
+**LOGIN**
+
+![image](https://user-images.githubusercontent.com/48147326/179213552-3edfd31f-3651-4ddd-b9ad-87d907301e61.png)
