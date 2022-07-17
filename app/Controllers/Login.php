@@ -76,7 +76,7 @@ class Login extends BaseController
                         'level'    => $level,
                     ];
                     session()->set($simpan_session);
-                    return redirect()->to(base_url('buku'));
+                    return redirect()->to(base_url('halaman'));
                 } else {
                     $sessError = [
                         'errPassword' => 'Password anda salah',

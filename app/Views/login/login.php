@@ -87,7 +87,8 @@
                                 </form>
                                 <hr>
                                 <div class="text-center">
-                                    <a class="small" href="<?= base_url() ?>/login/registrasi">Buat Akun Baru</a></a>
+                                    <a class="small" href="<?= base_url() ?>/login/registrasi">Buat Akun Baru</a></a> |
+                                    <a class="small" href="<?= base_url() ?>">Home</a></a>
                                 </div>
                             </div>
                         </div>

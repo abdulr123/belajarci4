@@ -29,9 +29,11 @@
                     <li class="nav-item">
                         <a class="nav-link active" aria-current="page" href="/">Home</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/halaman/aboutme">About Me</a>
-                    </li>
+                    <?php if (session()->level == 2) : ?>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/halaman/aboutme">About Me</a>
+                        </li>
+                    <?php endif; ?>
 
                     <?php if (session()->level == 1) : ?>
                         <li class="nav-item ">
@@ -41,10 +43,10 @@
 
                 </ul>
 
-                <?php if (session()->level == 1) : ?>
+                <?php if (session()->level != '') : ?>
                     Welcome <?= session()->get('username'); ?> | <a href="<?= base_url() ?>/login/logout" class="btn"> Logout</a>
                 <?php endif; ?>
-                <?php if (session()->level != 1) : ?>
+                <?php if (session()->level == '') : ?>
                     <a href="<?= base_url() ?>/login" class="btn btn-secondary"> Login</a>
                 <?php endif; ?>
 
