@@ -2,12 +2,21 @@
 
 namespace App\Controllers;
 
+use App\Models\BukuModel;
+
 class Halaman extends BaseController
 {
+    protected $BukuModel;
+    public function __construct()
+    {
+        $this->BukuModel = new BukuModel();
+    }
+
     public function index()
     {
         $data = [
-            'title' => 'Home - Belajar CodeIgniter 4'
+            'title' => 'Home - Belajar CodeIgniter 4',
+            'buku' => $this->BukuModel->getBuku()
         ];
         echo view('template/header', $data);
         return view('halaman/home');

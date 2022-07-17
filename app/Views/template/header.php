@@ -32,13 +32,21 @@
                     <li class="nav-item">
                         <a class="nav-link" href="/halaman/aboutme">About Me</a>
                     </li>
-                    <li class="nav-item ">
-                        <a class="nav-link" href="/buku/">Buku</a>
-                    </li>
+
+                    <?php if (session()->level == 1) : ?>
+                        <li class="nav-item ">
+                            <a class="nav-link" href="/buku/">Buku</a>
+                        </li>
+                    <?php endif; ?>
 
                 </ul>
 
-                Welcome <?= session()->get('username'); ?> | <a href="login/logout" class="btn"> Logout</a>
+                <?php if (session()->level == 1) : ?>
+                    Welcome <?= session()->get('username'); ?> | <a href="<?= base_url() ?>/login/logout" class="btn"> Logout</a>
+                <?php endif; ?>
+                <?php if (session()->level != 1) : ?>
+                    <a href="<?= base_url() ?>/login" class="btn btn-secondary"> Login</a>
+                <?php endif; ?>
 
 
             </div>

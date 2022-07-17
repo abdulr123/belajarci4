@@ -17,7 +17,7 @@ if (file_exists(SYSTEMPATH . 'Config/Routes.php')) {
  * --------------------------------------------------------------------
  */
 $routes->setDefaultNamespace('App\Controllers');
-$routes->setDefaultController('Login');
+$routes->setDefaultController('Halaman');
 $routes->setDefaultMethod('index');
 $routes->setTranslateURIDashes(false);
 $routes->set404Override();
@@ -32,7 +32,7 @@ $routes->setAutoRoute(true);
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
 
-$routes->get('/', 'Login::index');
+$routes->get('/', 'Halaman::index');
 
 //jika ada yang mengkases /buku/lalu-apapun , lalu kita arahkan ke controller Buku methodnya detail lalu kirimkan ke segment
 $routes->get('/buku/(:segment)', 'Buku::detail/$1');
