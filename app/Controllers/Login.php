@@ -25,6 +25,7 @@ class Login extends BaseController
         $password   = $this->request->getPost('password');
         $validation = \Config\Services::validation();
 
+        //proses validasi form input
         $valid      = $this->validate([
             'username'    => [
                 'label' => 'Username',
@@ -43,6 +44,7 @@ class Login extends BaseController
 
         ]);
 
+        //proses validasi form input
         if (!$valid) {
             $sessError = [
                 'errUsername' => $validation->getError('username'),
@@ -58,6 +60,7 @@ class Login extends BaseController
                 'username' => $username,
             ])->first();
 
+            //proses login untuk mengecek apakah sudah ada user yang terdaftar
             if ($dataUser == null) {
                 $sessError = [
                     'errUsername' => 'Maaf username tidak terdaftar',
@@ -88,6 +91,17 @@ class Login extends BaseController
     public function logout()
     {
         session()->destroy();
-        return redirect()->to('login');
+        return redirect()->to('halaman');
+    }
+
+    public function registrasi()
+    {
+
+        $data = [
+            'title' => 'Registrasi User',
+            //'buku' => $this->BukuModel->getBuku()
+        ];
+
+        return view('login/registrasi', $data);
     }
 }
